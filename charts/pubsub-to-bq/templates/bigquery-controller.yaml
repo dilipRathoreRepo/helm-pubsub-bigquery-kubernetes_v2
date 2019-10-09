@@ -1,0 +1,30 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-{{ .Chart.Name }} 
+  labels:
+    name: {{ .Release.Name }}-{{ .Chart.Name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      labels:
+        name: {{ .Release.Name }}-{{ .Chart.Name }}
+    spec:
+      containers:
+      - name: bigquery
+        image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+        env:
+        - name: PROCESSINGSCRIPT
+          value: {{ .Values.PROCESSINGSCRIPT }} 
+        # Change this to your pubsub topic
+        - name: PUBSUB_TOPIC
+          value: {{ .Values.PUBSUB_TOPIC }}
+        # Change this to your project ID.
+        - name: PROJECT_ID
+          value: {{ .Values.PROJECT_ID }}
+        # Change the following two settings to your dataset and table.
+        - name: BQ_DATASET
+          value: {{ .Values.BQ_DATASET }}
+        - name: BQ_TABLE
+          value: {{ .Values.BQ_TABLE }}

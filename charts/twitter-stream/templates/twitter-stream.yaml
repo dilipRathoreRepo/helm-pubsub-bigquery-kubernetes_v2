@@ -1,0 +1,44 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-{{ .Chart.Name }}
+  labels:
+    name: {{ .Release.Name }}-{{ .Chart.Name }}
+spec:
+  replicas: {{ .Values.replicaCount }} 
+  template:
+    metadata:
+      labels:
+        name: {{ .Release.Name }}-{{ .Chart.Name }}
+    spec:
+      containers:
+      - name: twitter-to-pubsub
+        image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+        env:
+        - name: PROCESSINGSCRIPT
+          value: {{ .Values.PROCESSINGSCRIPT }}
+        - name: PUBSUB_TOPIC
+          value: {{ .Values.PUBSUB_TOPIC }}
+        ## twitter credentials
+        - name: CONSUMERKEY
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Release.Name }}-{{ .Chart.Name }}-secret 
+              key: consumer_key
+        - name: CONSUMERSECRET
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Release.Name }}-{{ .Chart.Name }}-secret
+              key: consumer_secret
+        - name: ACCESSTOKEN
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Release.Name }}-{{ .Chart.Name }}-secret
+              key: access_token
+        - name: ACCESSTOKENSEC
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Release.Name }}-{{ .Chart.Name }}-secret
+              key: access_token_sec
+        - name: TWSTREAMMODE
+          value: {{ .Values.TWSTREAMMODE }}

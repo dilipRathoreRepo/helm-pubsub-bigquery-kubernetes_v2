@@ -1,0 +1,14 @@
+replicaCount: 1
+image:
+  repository: gcr.io/rising-minutia-254502/pubsub_bq_kubernetes
+  tag: v15
+PROCESSINGSCRIPT: twitter-to-pubsub
+PUBSUB_TOPIC: projects/rising-minutia-254502/topics/mypubsub
+secret:
+  consumer_key: bDgwS0J5SEUxaUpXaVpJVnpPbVdhUlJMRg==
+  consumer_secret: VVk4c0xXak9WZFB6TElHZnVOd2VDeHRzQTYzWmNXaGJVMXI4dmJrVmF4ZnpmRnU4dEU=
+  access_token: MTAzMjcxNzYwODA2NjQ2OTg4OC1EY1dsaWdDV2Y3YzVtM3g4TXNqQmF6cnNsRWtGMHE=
+  access_token_sec: emlJN1ZVTlRHR21yYmNmUnFreDdURE50RHE4WjRlZnZrSFpUM2Q0c1VBM2k4
+TWSTREAMMODE: sample
+
+
