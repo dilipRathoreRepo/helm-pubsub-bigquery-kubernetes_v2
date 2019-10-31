@@ -1,9 +1,9 @@
 PROCESSINGSCRIPT: pubsub-to-bigquery
-PUBSUB_TOPIC: projects/rising-minutia-254502/topics/mypubsub
-PROJECT_ID: rising-minutia-254502
+PUBSUB_TOPIC: projects/$DEVSHELL_PROJECT_ID/topics/mypubsub
+PROJECT_ID: $DEVSHELL_PROJECT_ID
 BQ_DATASET: mydataset
 BQ_TABLE: tweets
 replicaCount: 1
 image:
-  repository: gcr.io/rising-minutia-254502/pubsub_bq_kubernetes
+  repository: gcr.io/$DEVSHELL_PROJECT_ID/pubsub_bq_kubernetes
   tag: v15
